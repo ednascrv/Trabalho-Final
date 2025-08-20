@@ -1,11 +1,15 @@
+
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mãe Jéssica de Oyá Funiké</title>
+  <meta name="description" content="Mãe Jéssica de Oyá Funiké - Atendimento espiritual com búzios e cartas. Trabalhos espirituais para todos os fins em Passo Fundo - RS.">
+
   <style>
-  
     body, html {
       margin: 0;
       padding: 0;
@@ -14,74 +18,61 @@
       overflow-x: hidden;
     }
 
- 
-  .parallax {
-    height: 400px; 
-    background-attachment: fixed; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  /*Cada imagem diferente*/
-  #parallax1 {
-    background-image: url('imagens/jessica3.jpg');
-  }
-  #parallax2 {
-    background-image: url('imagens/chatimage.jpg');
-  }
-  #parallax3 {
-    background-image: url('imagens/logoreinodeoya.jpg');
-  }
-      section {
+    /* Estrutura base */
+    .parallax {
       position: relative;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background-attachment: fixed; /* efeito parallax */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      height: 80vh;
+      overflow: hidden;
     }
 
-  /*conteudo entre as imagens*/
-  .conteudo {
-    height: 200px;
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 80px 20px;
-    font-size: 24px;
-    color: #333;
-  }
-      .overlay {
+    /* Camada de fundo (controlada pelo JS) */
+    .parallax .bg {
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.3); /* leve escurecimento p/ legibilidade */
+      width: 100%;
+      height: 120%; /* maior que a seção para dar movimento */
+      background-position: center;
+      background-size: cover;
+      transform: translateY(0);
+      will-change: transform;
+      transition: transform 0.05s linear;
     }
 
-    .content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 20px;
+    /* Diferentes imagens */
+    #parallax1 .bg {
+      background-image: url('imagens/jessica3.jpg');
+    }
+    #parallax2 .bg {
+      background-image: url('imagens/chatimage.jpg');
+    }
+    #parallax3 .bg {
+      background-image: url('imagens/logoreinodeoya.jpg');
     }
 
-      h1 {
-      font-size: 3rem;
+    /* Conteúdo entre blocos */
+    .conteudo {
+      min-height: 250px;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 80px 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2.5rem;
       margin-bottom: 10px;
-      color: #ffd700; /* dourado */
+      color: #ffd700;
       text-shadow: 2px 2px 6px #000;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       margin-bottom: 20px;
     }
 
     .cta {
+      display: inline-block;
       background: #b30000;
       padding: 15px 25px;
       border-radius: 8px;
@@ -90,29 +81,50 @@
       font-weight: bold;
       transition: 0.3s;
     }
-</style>
+
+    .cta:hover {
+      background: #800000;
+    }
+  </style>
 </head>
 <body>
 
-  <div id="parallax1" class="parallax"></div>
+  <section id="parallax1" class="parallax">
+    <div class="bg"></div>
+  </section>
 
   <div class="conteudo">
     <h1>Mãe Jéssica de Oyá Funiké</h1>
     <h2>Atendimento espiritual • Búzios e Cartas</h2>
   </div>
 
-  <div id="parallax2" class="parallax"></div>
+  <section id="parallax2" class="parallax">
+    <div class="bg"></div>
+  </section>
 
   <div class="conteudo">
     <h1>Quer respostas?</h1>
     <h2>Orixá te mostra o caminho!</h2>
-    <h6>Realiza-se trabalho para todos os fins.</h6>
-      <a href="tel:+5554999981834" class="cta">Agende pelo WhatsApp</a>
-      <p>Passo Fundo • RS</p>
+    <p>Realiza-se trabalho para todos os fins.</p>
+    <a href="https://wa.me/5554999981834" target="_blank" class="cta">Agende pelo WhatsApp</a>
+    <p>📍 Passo Fundo • RS</p>
+  </div>
 
-  <div id="parallax3" class="parallax"></div>
+  <section id="parallax3" class="parallax">
+    <div class="bg"></div>
+  </section>
+
+  <script>
+    // Função de parallax com base no scroll
+    document.addEventListener("scroll", function() {
+      document.querySelectorAll(".parallax").forEach(function(section) {
+        const bg = section.querySelector(".bg");
+        let offset = window.scrollY - section.offsetTop;
+        // movimento suave: divide o scroll
+        bg.style.transform = `translateY(${offset * 0.4}px)`; 
+      });
+    });
+  </script>
 
 </body>
-
 </html>
-
